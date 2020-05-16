@@ -1,5 +1,6 @@
 #include <conio.h>
 #include <windows.h>
+#include <sstream>
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -65,8 +66,8 @@ void positionCalc()
 	if (foodEaten)
 	{
 		/* code */
-		foodX = (rand() % (xMax - 2)) + 1;
-		foodY = (rand() % (yMax - 2)) + 1;
+		foodX = (rand() % (xMax - 2)) + 2;
+		foodY = (rand() % (yMax - 2)) + 2;
 		foodEaten = false;
 	}
 
