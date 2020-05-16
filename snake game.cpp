@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int xMax, yMax,			//boundariees
+int xMax, yMax,			//boundaries
 	headx, heady,		//head of the snake
 	foodX, foodY,		//food of the snake
 	snakeLen = 3,		//length of the snake initially 3
@@ -11,7 +11,7 @@ int xMax, yMax,			//boundariees
 
 int bodyX[50], bodyY[50];		//for keeping the position of the body of the snake
 
-bool gameOver = false;		//if true than gameover
+bool gameOver = false;		//if true than game over
 bool foodEaten = true;		//if true new food will be generated
 
 enum direction {UP, DOWN, LEFT, RIGHT, STOP};
@@ -25,7 +25,7 @@ void positionCalc()
 
 	if (dir != STOP)
 	{
-		//updating the index value in the array with the privious one
+		//updating the index value in the array with the previous one
 		for (int i = (snakeLen - 1); i >= 1 ; --i)
 		{
 			bodyX[i] = bodyX[i - 1];
@@ -33,7 +33,7 @@ void positionCalc()
 		}
 	}
 
-	//Changing the value of the cordinates for the movement of the snake
+	//Changing the value of the coordinates for the movement of the snake
 	switch(dir)
 	{
 		case LEFT : --headx;
@@ -61,7 +61,7 @@ void positionCalc()
 		snakeLen++;
 	}
 
-	//random pposition of food, for the snake
+	//random position of food, for the snake
 	if (foodEaten)
 	{
 		/* code */
@@ -69,6 +69,19 @@ void positionCalc()
 		foodY = (rand() % (yMax - 2)) + 1;
 		foodEaten = false;
 	}
+
+    //if snake touches the boundary
+	if(headx == 1 || heady == 1 || headx == xMax || heady == yMax)
+    {
+        gameOver = true;
+    }
+
+    //if snake touches its body
+    for(int i=1;i<snakeLen;i++)
+    {
+        if(headx == bodyX[i] && heady == bodyY[i])
+            gameOver = true;
+    }
 }
 
 void getInput()
@@ -95,7 +108,35 @@ void getInput()
 	bodyY[2] = bodyY[1] + 1;
 }
 
+/*
+   bool directionAccessibility(char input) checks whether the direction entered by the user is
+   accessible by the snake or not as per its current direction(value of dir). For instance, take a
+   case where the snake is moving towards RIGHT. If the player tries to move LEFT, the snake would
+   retrace its path moving through its own body. This is not a possible case and would result in
+   GAME OVER as the head will touch the body. This function will make that direction inaccessible
+   and the snake will keep moving in its current direction.
+*/
 
+bool directionAccessibility(char input)
+{
+    direction checkDir;
+    switch(input)
+    {
+        case 'a' : checkDir = RIGHT;
+					break;
+        case 'w' : checkDir = DOWN;
+					break;
+		case 'd' : checkDir = LEFT;
+					break;
+		case 's' : checkDir = UP;
+					break;
+    }
+    if(checkDir != dir)
+        return true;
+    else
+        return false;
+
+}
 
 void display()
 {
@@ -106,7 +147,7 @@ void display()
 		//loop in X direction
 		for (int j = 1; j <= xMax; ++j)
 		{
-			//for printiing out the wall at the boundries
+			//for printing out the wall at the boundaries
 			if (i == 1 || i == yMax || j == 1 || j == xMax)
 			{
 				cout << "#";
@@ -155,18 +196,32 @@ void input()
 	{
 		switch(getch())
 		{
-			case 'a' : dir = LEFT;
-					break;
-			case 'w' : dir = UP;
-					break;
-			case 'd' : dir = RIGHT;
-					break;
-			case 's' : dir = DOWN;
-					break;
+			case 'a' : if(directionAccessibility('a'))
+			             dir = LEFT;
+					  break;
+			case 'w' : if(directionAccessibility('w'))
+			             dir = UP;
+                      break;
+			case 'd' : if(directionAccessibility('d'))
+			             dir = RIGHT;
+					  break;
+			case 's' : if(directionAccessibility('s'))
+			             dir = DOWN;
+					  break;
 			case 'x' : gameOver = true;
 					break;
 		}
 	}
+}
+
+void gameOverDisplay()
+{
+    system("CLS");
+    cout << "\n\t-------------------------------------------";
+    cout << "\n\t-----------------GAMEOVER------------------";
+    cout << "\n\t-------------------------------------------";
+    cout << "\n\t Score :"<< score<< "\n\n\n\n";
+
 }
 
 int main()
@@ -178,8 +233,13 @@ int main()
 		display();
 		input();
 		positionCalc();
-		Sleep(100);
+		Sleep(50);
 	}
+
+	if(gameOver)
+    {
+        gameOverDisplay();
+    }
 
 
 	return 0;
