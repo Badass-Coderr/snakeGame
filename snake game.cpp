@@ -237,12 +237,8 @@ int main()
 		positionCalc();
 		Sleep(50);
 	}
-
-	if(gameOver)
-    {
+	
         gameOverDisplay();
-    }
-
-
+    
 	return 0;
 }
