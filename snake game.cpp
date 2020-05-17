@@ -222,6 +222,7 @@ void gameOverDisplay()
     cout << "\n\t-----------------GAMEOVER------------------";
     cout << "\n\t-------------------------------------------";
     cout << "\n\t Score :"<< score<< "\n\n\n\n";
+    sleep(5000);
 
 }
 
