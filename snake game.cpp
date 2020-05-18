@@ -82,6 +82,7 @@ void positionCalc()
     {
         if(headx == bodyX[i] && heady == bodyY[i])
             gameOver = true;
+
     }
 }
 
@@ -195,22 +196,38 @@ void input()
 {
 	if (kbhit())
 	{
-		switch(getch())
+	    unsigned int c = getch();
+        if(c == 224)
+           c = getch();
+		switch(c)
 		{
+		    case 75  :
+		    case 'A' :
 			case 'a' : if(directionAccessibility('a'))
 			             dir = LEFT;
 					  break;
+
+			case 72  :
+            case 'W' :
 			case 'w' : if(directionAccessibility('w'))
 			             dir = UP;
                       break;
-			case 'd' : if(directionAccessibility('d'))
+
+			case 77  :
+            case 'D' :
+            case 'd' : if(directionAccessibility('d'))
 			             dir = RIGHT;
 					  break;
+
+			case 80  :
+            case 'S' :
 			case 's' : if(directionAccessibility('s'))
 			             dir = DOWN;
 					  break;
+
+            case 'X' :
 			case 'x' : gameOver = true;
-					break;
+					  break;
 		}
 	}
 }
@@ -222,7 +239,7 @@ void gameOverDisplay()
     cout << "\n\t-----------------GAMEOVER------------------";
     cout << "\n\t-------------------------------------------";
     cout << "\n\t Score :"<< score<< "\n\n\n\n";
-    sleep(5000);
+    Sleep(5000);
 
 }
 
@@ -230,6 +247,7 @@ int main()
 {
 	/* code */
 	getInput();
+
 	while(!gameOver)
 	{
 		display();
@@ -237,8 +255,8 @@ int main()
 		positionCalc();
 		Sleep(50);
 	}
-	
+
         gameOverDisplay();
-    
+
 	return 0;
 }
