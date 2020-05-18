@@ -124,9 +124,9 @@ bool directionAccessibility(char input)
     direction checkDir;
     switch(input)
     {
-        case 'a' : checkDir = RIGHT;
+                case 'a' : checkDir = RIGHT;
 					break;
-        case 'w' : checkDir = DOWN;
+                case 'w' : checkDir = DOWN;
 					break;
 		case 'd' : checkDir = LEFT;
 					break;
@@ -197,37 +197,37 @@ void input()
 	if (kbhit())
 	{
 	    unsigned int c = getch();
-        if(c == 224)
-           c = getch();
-		switch(c)
-		{
-		    case 75  :
-		    case 'A' :
+            if(c == 224)  //arrow keys give ASCII values, first one is 224 second one represents the key pressed. 
+               c = getch();
+	    switch(c)
+	    {
+		        case 75  :
+		        case 'A' :
 			case 'a' : if(directionAccessibility('a'))
-			             dir = LEFT;
-					  break;
+			              dir = LEFT;
+			           break;
 
 			case 72  :
-            case 'W' :
+                        case 'W' :
 			case 'w' : if(directionAccessibility('w'))
-			             dir = UP;
-                      break;
+			              dir = UP;
+                                   break;
 
 			case 77  :
-            case 'D' :
-            case 'd' : if(directionAccessibility('d'))
-			             dir = RIGHT;
-					  break;
+                        case 'D' :
+                        case 'd' : if(directionAccessibility('d'))
+			              dir = RIGHT;
+			           break;
 
 			case 80  :
-            case 'S' :
+                        case 'S' :
 			case 's' : if(directionAccessibility('s'))
-			             dir = DOWN;
-					  break;
+			              dir = DOWN;
+		     		   break;
 
-            case 'X' :
+                        case 'X' :
 			case 'x' : gameOver = true;
-					  break;
+				   break;
 		}
 	}
 }
