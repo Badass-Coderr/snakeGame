@@ -15,3 +15,6 @@ New features added:
   2. Added function to check whether the direction entered by the user is accessible by the snake or not.(bool directionAccessibility(char input);
   3. Added a gameover display screen which shows the score.
   4. Modified the input function to allow movement only in accessible direction.
+
+patch 1.11
+  1. Added functionality for using arrow keys for movement.
