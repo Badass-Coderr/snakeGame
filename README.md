@@ -16,3 +16,6 @@ patch 1.01
          - detailed description commented before the function in the cpp file.
   3. Added a gameover display screen which shows the score.(gameOverDisplay(); 217-225)
   4. Modified the input function to allow movement only in accessible direction.
+
+patch 1.11
+  1. Added functionality for using arrow keys for movement.
